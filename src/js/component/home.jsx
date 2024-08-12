@@ -1,26 +1,22 @@
 import React from "react";
+import SecondsCounter from "./secondsCounter";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
-const Home = () => {
+const Home = ({ digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix }) => {
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+	  <div className="d-flex flex-row mb-3 justify-content-center bg-black ms-3 me-3 mt-3">
+		<SecondsCounter text={<i className="fa-regular fa-clock"></i>} />
+		<SecondsCounter text={digitSix % 10} />
+		<SecondsCounter text={digitFive % 10} />
+		<SecondsCounter text={digitFour % 10} />
+		<SecondsCounter text={digitThree % 10} />
+		<SecondsCounter text={digitTwo % 10} />
+		<SecondsCounter text={digitOne % 10} />
+	  </div>
 	);
-};
-
-export default Home;
+  };
+  
+  export default Home;
