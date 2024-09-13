@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import SecondsCounter from "./secondsCounter";
 import Button from "./button";
 
-const Home = ({ digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix }) => {
-    const [isRunning, setIsRunning] = useState(true); // Estado para manejar si el contador está en ejecución
-    const [counter, setCounter] = useState(0); // Estado para el contador
+const Home = () => {
+    const [isRunning, setIsRunning] = useState(true);
+    const [counter, setCounter] = useState(0);
 
-    // useEffect para manejar el temporizador
     useEffect(() => {
         let interval;
         if (isRunning) {
@@ -14,16 +13,14 @@ const Home = ({ digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix }
                 setCounter(prevCounter => prevCounter + 1);
             }, 1000);
         } 
-        return () => clearInterval(interval); // Limpiar el intervalo cuando se detenga
-    }, [isRunning]);  // Solo se ejecuta cuando `isRunning` cambia
+        return () => clearInterval(interval);
+    }, [isRunning]);
 
-    // Función para reiniciar el contador
     const resetCounter = () => {
         setCounter(0);
-        setIsRunning(false);  // Detener el contador al reiniciar
+        setIsRunning(true);
     };
 
-    // Cálculo de los dígitos
     const six = Math.floor(counter / 100000) % 10;
     const five = Math.floor(counter / 10000) % 10;
     const four = Math.floor(counter / 1000) % 10;
@@ -43,18 +40,20 @@ const Home = ({ digitOne, digitTwo, digitThree, digitFour, digitFive, digitSix }
             <SecondsCounter text={one} />
         </div>
 
-        {/* Renderizamos los botones de control */}
         <div>
             <Button 
-                onClick={() => setIsRunning(false)} 
+                onClick={() => setIsRunning(false)}
+                customClass="btn btn-danger" 
                 text="Stop" 
             />
             <Button 
                 onClick={() => setIsRunning(true)} 
+                customClass="btn btn-success"
                 text="Start" 
             />
             <Button 
                 onClick={resetCounter} 
+                customClass="btn btn-secondary"
                 text="Reset" 
             />
         </div>
